@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="server-model.UserDao">
+    <resultMap id="User" type="reky.server.domain.User.User">
+        <result column="userId" property="userId" jdbcType="BIGINT"/>
+        <result column="userName" property="userName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="role" property="role" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="UserColumn">
+        userId,
+        userName,
+        password,
+        role
+    </sql>
+
+    <insert id="insertUser" parameterType="reky.server.domain.User.User">
+        INSERT INTO
+        server.user(userName,password,role)
+            VALUE
+            (#{user.userName},
+            #{user.password},
+            #{user.role})
+    </insert>
+
+    <delete id="deleteUser" parameterType="reky.server.domain.User.User">
+        DELETE FROM server.user WHERE userName=#{user.userName}
+    </delete>
+
+    <select id="selectAllUser" resultMap="User">
+
+    </select>
+</mapper>
